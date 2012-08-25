@@ -1,0 +1,2 @@
+class Documentary < Program
+end

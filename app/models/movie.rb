@@ -1,0 +1,2 @@
+class Movie < Program
+end
