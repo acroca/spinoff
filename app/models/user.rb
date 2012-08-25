@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email
 
-  has_one :company
+  has_one :company, dependent: :destroy
 
   validates_presence_of :email
   validates_format_of :email, :with =>  /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
       user = User.new email: email
       user.plain_password = password
       user.save
-      return nil unless user.valid?
+      return false unless user.valid?
     end
     user
   end

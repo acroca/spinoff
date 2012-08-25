@@ -64,6 +64,9 @@ GEM
     newrelic_rpm (3.4.1)
     pg (0.14.0)
     polyglot (0.3.3)
+    rabl (0.7.1)
+      activesupport (>= 2.3.14)
+      multi_json (~> 1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -124,6 +127,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -134,9 +138,11 @@ DEPENDENCIES
   jquery-rails (~> 2.0)
   newrelic_rpm (~> 3.4)
   pg (~> 0.14)
+  rabl (~> 0.7)
   rails (~> 3.2)
   rspec-rails (~> 2.11)
   shoulda-matchers (~> 1.2)
   therubyracer
   uglifier (>= 1.0.3)
   unicorn (~> 4.3)
+  yajl-ruby (~> 1.1)

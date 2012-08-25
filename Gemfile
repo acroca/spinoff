@@ -4,6 +4,8 @@ gem 'rails', '~> 3.2'
 
 gem 'jquery-rails', "~> 2.0"
 gem 'pg', '~> 0.14'
+gem 'rabl', "~> 0.7"
+gem 'yajl-ruby', "~> 1.1"
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'

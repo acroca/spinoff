@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
 
   validates_presence_of :name
   validates_numericality_of :money
+  validates_uniqueness_of :user_id
 
   def buy(program)
     return false unless program.available?

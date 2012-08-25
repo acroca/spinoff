@@ -14,6 +14,12 @@ describe Company do
   it { should allow_value([create(:movie)]).for(:programs) }
   it { should allow_value([create(:documentary)]).for(:programs) }
 
+  it 'allows only one company per user' do
+    user = create(:user_with_company)
+
+    build(:company, user: user).should_not be_valid
+  end
+
   describe ".buy" do
     let(:program) { create :movie, available: true }
     let(:company) { create :company }
