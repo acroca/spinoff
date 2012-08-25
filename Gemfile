@@ -8,7 +8,8 @@ gem 'rabl', "~> 0.7"
 gem 'yajl-ruby', "~> 1.1"
 
 group :assets do
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 3.2'
+  gem 'coffee-rails', '~> 3.2'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails', "~> 2.1"
