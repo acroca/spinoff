@@ -9,3 +9,16 @@ window.Spinoff =
   Collections: {}
   Routers: {}
   Views: {}
+
+old_sync = Backbone.sync
+Backbone.sync = (method, model, options) ->
+  options.username = "albert@acroca.com"
+  options.password = "albertpassword"
+  old_sync(method, model, options)
+
+
+
+$ ->
+  $ = jQuery
+  homeRouter = new Spinoff.Routers.HomesRouter();
+  Backbone.history.start();
