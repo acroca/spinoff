@@ -21,6 +21,7 @@ group :development, :test do
   gem 'shoulda-matchers', "~> 1.2"
   gem 'factory_girl_rails', "~> 3.0"
   #gem 'capybara', "~> 1.1"
+  gem 'jasmine', "~> 1.2"
 end
 
 group :production do

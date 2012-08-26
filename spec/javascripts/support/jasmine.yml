@@ -1,0 +1,15 @@
+src_files:
+  - assets/application.js
+
+stylesheets:
+  - stylesheets/**/*.css
+
+helpers:
+  - helpers/**/*.js
+
+spec_files:
+  - ../assets/javascript_tests.js
+
+src_dir:
+
+spec_dir:
