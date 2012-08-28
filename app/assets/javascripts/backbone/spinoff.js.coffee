@@ -20,5 +20,4 @@ Backbone.sync = (method, model, options) ->
 
 $ ->
   $ = jQuery
-  homeRouter = new Spinoff.Routers.HomesRouter();
   Backbone.history.start();
