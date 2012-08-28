@@ -1,0 +1,8 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'game' %>
+<% end %>
+<div id="game"
+     data-user-token="<%= current_user.authentication_token %>"
+     data-user-company-id="<%= current_user.company.id %>">
+
+</div>

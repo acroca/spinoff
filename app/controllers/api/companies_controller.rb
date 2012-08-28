@@ -1,6 +1,6 @@
 class Api::CompaniesController < ApiController
 
-  before_filter :login_user, only: [:create]
+  before_filter :authenticate_user!, only: [:create]
 
   def create
     name = params["company"]['name']

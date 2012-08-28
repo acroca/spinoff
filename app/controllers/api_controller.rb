@@ -9,11 +9,4 @@ class ApiController < ApplicationController
     @user
   end
 
-  def login_user
-    authenticate_or_request_with_http_basic("Application") do |name, password|
-      @user = User.login(name, password)
-      @user.present?
-    end
-  end
-
 end
