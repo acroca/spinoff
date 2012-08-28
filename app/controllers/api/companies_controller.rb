@@ -1,6 +1,6 @@
 class Api::CompaniesController < ApiController
 
-  before_filter :require_company, except: [:create]
+  before_filter :login_user, only: [:create]
 
   def create
     name = params["company"]['name']
@@ -8,7 +8,7 @@ class Api::CompaniesController < ApiController
     company.user = current_user
     if company.valid?
       company.save!
-      render nothing: true, status: 201
+      render json: company, status: 201
     else
       puts company.errors.inspect
       render nothing: true, status: 412
@@ -16,6 +16,6 @@ class Api::CompaniesController < ApiController
   end
 
   def show
-    @company = current_user.company
+    @company = Company.find(params[:id])
   end
 end
