@@ -7,6 +7,7 @@ gem 'pg', '~> 0.14'
 gem 'rabl', "~> 0.7"
 gem 'yajl-ruby', "~> 1.1"
 gem "rails-backbone", "~> 0.7"
+gem "devise", "~> 2.1"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2'

@@ -4,12 +4,8 @@ FactoryGirl.define do
     sequence :email do |n|
       "email#{n}@example.com"
     end
-    plain_password 'my_password'
-  end
-
-  factory(:user_with_company, :parent => :user) do
-    after(:build) { |user|
-      user.company = create(:company, user: user)
-    }
+    password 'my_password'
+    password_confirmation 'my_password'
+    company_name 'Test company'
   end
 end

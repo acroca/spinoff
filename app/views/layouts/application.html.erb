@@ -48,7 +48,11 @@
 
       <div class="container nav-collapse">
         <ul class="nav">
-          <li><%= link_to "My company", "#" %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Play!", "#" %></li>
+          <% end %>
+          <li><%= link_to "Register", new_user_registration_path %></li>
+          <li><%= link_to "Login", new_user_session_path %></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -60,6 +64,7 @@
   <div class="content">
     <div class="row">
       <div class="span12" id="content">
+        <%= render partial: 'shared/flash', locals: {flash: flash} %>
         <%= yield %>
       </div>
     </div>
