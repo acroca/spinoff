@@ -5,19 +5,30 @@
 #= require_tree ./routers
 
 window.Spinoff =
-  Models: {}
-  Collections: {}
-  Routers: {}
-  Views: {}
+  Models:
+    {}
+  Collections:
+    {}
+  Routers:
+    {}
+  Views:
+    {}
 
-old_sync = Backbone.sync
+Backbone.old_sync = Backbone.sync
 Backbone.sync = (method, model, options) ->
-  options.username = "albert@acroca.com"
-  options.password = "albertpassword"
-  old_sync(method, model, options)
-
+  new_options = _.extend(
+    beforeSend: (xhr) ->
+      token = $("#game").data("user-token")
+      xhr.setRequestHeader('X-CSRF-Token', token) if token
+  , options)
+  Backbone.old_sync(method, model, options)
 
 
 $ ->
   $ = jQuery
-  Backbone.history.start();
+
+  window.company = new Spinoff.Models.Company(id: $('#game').data('user-company-id'))
+  window.company.fetch
+    success: ->
+      @view = new Spinoff.Views.Homes.CompanyDetailView(model: window.company)
+      $("#game").html(@view.render().el)
