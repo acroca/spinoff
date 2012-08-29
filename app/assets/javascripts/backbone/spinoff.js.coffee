@@ -26,9 +26,9 @@ Backbone.sync = (method, model, options) ->
 
 $ ->
   $ = jQuery
-
   window.company = new Spinoff.Models.Company(id: $('#game').data('user-company-id'))
-  window.company.fetch
-    success: ->
-      @view = new Spinoff.Views.Homes.CompanyDetailView(model: window.company)
-      $("#game").html(@view.render().el)
+  router = new Spinoff.Routers.SpinoffRouter()
+  Backbone.history.start({pushState:true})
+#    success: ->
+#      @view = new Spinoff.Views.Homes.CompanyDetailView(object: window.company)
+#      $("#game").html(@view.render().el)
