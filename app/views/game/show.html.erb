@@ -3,7 +3,7 @@
 <% end %>
 <div id="game"
      data-user-token="<%= current_user.authentication_token %>"
-     data-user-company-id="<%= current_user.company.id %>">
+     data-user-company-json="<%= current_user.company.to_json %>">
 
   <h2>
     Starting game...

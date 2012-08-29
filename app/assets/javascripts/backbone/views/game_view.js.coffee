@@ -5,7 +5,7 @@ class Spinoff.Views.GameView extends Backbone.View
 
   initialize: (options) ->
     @subviews = [
-      new Spinoff.Views.Homes.CompanyDetailView      model: company
+      new Spinoff.Views.CompanyDetailView      model: company
     ]
   render: ->
     $(@el).empty()
