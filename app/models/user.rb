@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :company_name
 
   after_create :create_company
+  before_save :reset_authentication_token
 
   private
 

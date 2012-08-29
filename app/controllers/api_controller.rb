@@ -1,12 +1,14 @@
 class ApiController < ApplicationController
   respond_to :json
 
-  def require_company
-    render(text: "Company not created", status: 406) if current_user.company.nil?
+  before_filter :skip_trackable
+
+  def skip_trackable
+    request.env['devise.skip_trackable'] = true
   end
 
-  def current_user
-    @user
+  def require_company
+    render(text: "Company not created", status: 406) if current_user.company.nil?
   end
 
 end
