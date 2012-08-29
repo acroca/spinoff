@@ -6,7 +6,7 @@ class Spinoff.Views.GameView extends Backbone.View
   subviewEl: '#game-subview'
 
   events:
-    "click .available-programs": "available_programs"
+    "click .available-programs": "availablePrograms"
 
   initialize: (options) ->
 
@@ -21,7 +21,7 @@ class Spinoff.Views.GameView extends Backbone.View
   setSubview: (content) ->
     @$(@subviewEl).html(content)
 
-  available_programs: ->
+  availablePrograms: ->
     @resetSubview()
     availablePrograms = new Spinoff.Collections.ProgramsCollection()
     availablePrograms.fetch
@@ -29,4 +29,3 @@ class Spinoff.Views.GameView extends Backbone.View
         view = new Spinoff.Views.AvailableProgramsView
           collection: availablePrograms
         @setSubview(view.render().el)
-    false
