@@ -3,7 +3,6 @@ class Spinoff.Views.AvailableProgramsView extends Backbone.View
 
   initialize: ->
     @collection.bind 'reset', @render, @
-    @collection.fetch()
 
   render: ->
     $(@el).html(@template(programs: @collection))
