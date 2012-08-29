@@ -6,5 +6,6 @@ Spinoff::Application.routes.draw do
 
   namespace :api, path: 'api/v1' do
     resources :companies, only: [:show]
+    resources :programs, only: [:index, :show]
   end
 end
