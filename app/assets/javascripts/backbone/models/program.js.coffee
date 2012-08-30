@@ -11,3 +11,5 @@ class Spinoff.Models.Program extends Backbone.Model
 class Spinoff.Collections.ProgramsCollection extends Backbone.Collection
   model: Spinoff.Models.Program
   url: '/api/v1/programs'
+
+window.programsCollection = new Spinoff.Collections.ProgramsCollection()

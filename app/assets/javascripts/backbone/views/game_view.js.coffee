@@ -23,9 +23,8 @@ class Spinoff.Views.GameView extends Backbone.View
 
   availablePrograms: ->
     @resetSubview()
-    availablePrograms = new Spinoff.Collections.ProgramsCollection()
-    availablePrograms.fetch
+    programsCollection.fetch
       success: =>
         view = new Spinoff.Views.AvailableProgramsView
-          collection: availablePrograms
+          collection: programsCollection
         @setSubview(view.render().el)
