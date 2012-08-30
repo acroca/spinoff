@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::ProgramsController do
   describe "GET '/api/v1/programs'" do
-    let!(:available_program)     { create(:movie, available: true) }
+    let!(:available_program) { create(:movie, available: true) }
     let!(:unavailable_program) { create(:movie, available: false) }
 
     def do_request
@@ -36,6 +36,22 @@ describe Api::ProgramsController do
       response.status.should == 200
       assigns(:program).should == program
       response.should render_template("api/programs/show")
+    end
+  end
+
+  describe "PUT '/api/v1/programs/1'" do
+    let(:program) { create(:movie, available: true) }
+    let(:user) { create(:user) }
+
+    before { sign_in user }
+
+    def do_request(program_params)
+      get :update, id: program.id, program: program_params, format: 'json'
+    end
+
+    it 'buys the program updating its company_id' do
+      Company.any_instance.should_receive(:buy).with(program)
+      do_request company_id: user.company.id
     end
   end
 end
