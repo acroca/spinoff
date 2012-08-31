@@ -25,8 +25,9 @@ class Spinoff.Views.AvailableProgramView extends Backbone.View
     $(@el).html(@template(program: @model))
     @
 
-  buy: ->
+  buy: (e) ->
+    e.preventDefault()
     @model.set(company_id: company.get("id"))
     @model.save()
-    programsCollection.fetch()
-    false
+    $(@el).remove()
+    @
