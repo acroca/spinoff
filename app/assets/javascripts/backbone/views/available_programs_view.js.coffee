@@ -29,5 +29,6 @@ class Spinoff.Views.AvailableProgramView extends Backbone.View
     e.preventDefault()
     @model.set(company_id: company.get("id"))
     @model.save()
+    company.programs.add(@model)
     $(@el).remove()
     @

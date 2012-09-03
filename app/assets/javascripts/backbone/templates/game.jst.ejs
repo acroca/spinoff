@@ -3,7 +3,10 @@
     <div class='well sidebar-nav'>
       <h3><%= name %></h3>
       <p>
-        Money: $<span class='money'><%= money %></span>
+        Money: $<span class='money'><%= company.get("money") %></span>
+      </p>
+      <p>
+        Programs: <span class='programs'><%= company.programs.length %></span>
       </p>
 
       <hr />

@@ -20,6 +20,9 @@ $.ajaxSetup
 
 $ ->
   $ = jQuery
-  window.company = new Spinoff.Models.Company($('#game').data('user-company-json'))
+  window.company = new Spinoff.Models.Company(
+    $('#game').data('user-company-json'),
+    $('#game').data('user-company-programs-json')
+  )
   router = new Spinoff.Routers.SpinoffRouter()
   Backbone.history.start({root: '/game'})

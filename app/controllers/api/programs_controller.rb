@@ -3,6 +3,12 @@ class Api::ProgramsController < ApiController
     @program = Program.find(params[:id])
   end
 
+  def company_programs
+    @company = Company.find(params[:id])
+    @programs = @company.programs
+    render :index
+  end
+
   def index
     @programs = Program.available
   end

@@ -24,6 +24,30 @@ describe Api::ProgramsController do
     end
   end
 
+  describe "GET '/api/v1/company/2/programs'" do
+    let!(:user) { create(:user) }
+    let!(:user_program) { create(:movie, available: true, company: user.company ) }
+    let!(:not_user_program) { create(:movie, available: false) }
+
+    def do_request
+      get :company_programs, id: user.company.id, format: 'json'
+    end
+
+    it "returns the program information" do
+      do_request
+      response.status.should == 200
+      assigns(:programs).should_not be_nil
+      response.should render_template("api/programs/index")
+    end
+
+    it "returns available programs" do
+      do_request
+      programs = assigns(:programs)
+      programs.should include(user_program)
+      programs.should_not include(not_user_program)
+    end
+  end
+
   describe "GET '/api/v1/programs/1'" do
     let(:program) { create(:movie) }
 

@@ -5,7 +5,11 @@ Spinoff::Application.routes.draw do
   get "game" => 'game#show', as: :game
 
   namespace :api, path: 'api/v1' do
-    resources :companies, only: [:show]
+    resources :companies, only: [:show] do
+      member do
+        get 'programs' => 'programs#company_programs'
+      end
+    end
     resources :programs, only: [:index, :show, :update]
   end
 end

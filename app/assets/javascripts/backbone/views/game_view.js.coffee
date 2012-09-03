@@ -12,7 +12,7 @@ class Spinoff.Views.GameView extends Backbone.View
 
   render: ->
     $(@el).empty()
-    $(@el).html(@template(window.company.toJSON()))
+    $(@el).html(@template(company: window.company))
     @
 
   resetSubview: ->
