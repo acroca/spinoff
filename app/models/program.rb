@@ -17,6 +17,7 @@ class Program < ActiveRecord::Base
   def self.generate
     program = self.new(name: random_name)
     program.available = true
+    program.price = rand(9_900) + 100
     program.save
     program
   end

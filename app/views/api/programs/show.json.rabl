@@ -1,3 +1,3 @@
 object @program
-attributes :id, :name, :available, :company_id, :type
+attributes :id, :name, :available, :price, :company_id, :type
 

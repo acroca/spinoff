@@ -6,7 +6,7 @@ class Spinoff.Views.AvailableProgramsView extends Backbone.View
 
   render: ->
     $(@el).html(@template())
-    listElement = @$('ul')
+    listElement = @$('table > tbody')
     listElement.empty()
     for program in @collection.models
       programView = new Spinoff.Views.AvailableProgramView(model: program)
@@ -15,6 +15,7 @@ class Spinoff.Views.AvailableProgramsView extends Backbone.View
 
 class Spinoff.Views.AvailableProgramView extends Backbone.View
   template: JST["backbone/templates/available_program"]
+  tagName: 'tr'
 
   events:
     "click .buy": "buy"

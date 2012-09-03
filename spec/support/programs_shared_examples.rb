@@ -45,6 +45,10 @@ shared_examples_for "a program subclass" do
       described_class.should_receive(:random_name).and_return("Random")
       subject.name.should == "Random"
     end
+
+    it 'has price' do
+      subject.price.should >= 100
+    end
   end
 
   describe ".as_json" do
