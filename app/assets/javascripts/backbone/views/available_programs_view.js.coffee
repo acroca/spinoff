@@ -22,6 +22,7 @@ class Spinoff.Views.AvailableProgramView extends Backbone.View
 
   initialize: ->
     @model.bind 'change', @render, @
+    company.bind 'change', @render, @
 
   render: ->
     content = $(@template(program: @model))
@@ -35,5 +36,6 @@ class Spinoff.Views.AvailableProgramView extends Backbone.View
     @model.set(company_id: company.get("id"))
     @model.save()
     company.programs.add(@model)
+    company.set(money: company.get('money') - @model.get('price'))
     $(@el).remove()
     @

@@ -21,13 +21,19 @@ describe Company do
   end
 
   describe ".buy" do
-    let(:program) { create :movie, available: true }
-    let(:company) { create :company }
+    let(:program) { create :movie, available: true, price: 100 }
+    let(:company) { create :company, money: 300 }
 
     it "gives the program to the company" do
       expect{
         company.buy(program)
-      }.to change{company.programs.include?(program)}.from(false).to(true)
+      }.to change{company.reload.programs.include?(program)}.from(false).to(true)
+    end
+
+    it 'takes the money of the company' do
+      expect{
+        company.buy(program)
+      }.to change{company.reload.money}.from(300).to(200)
     end
 
     it "marks the program as not available" do

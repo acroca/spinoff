@@ -12,6 +12,8 @@ class Company < ActiveRecord::Base
     return false unless program.available?
     program.available = false
     program.save
+    self.money -= program.price
+    self.save
     self.programs << program
     true
   end
