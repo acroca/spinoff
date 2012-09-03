@@ -19,11 +19,15 @@ class Spinoff.Views.AvailableProgramView extends Backbone.View
 
   events:
     "click .buy": "buy"
+
   initialize: ->
     @model.bind 'change', @render, @
 
   render: ->
-    $(@el).html(@template(program: @model))
+    content = $(@template(program: @model))
+    if company.get("money") < @model.get("price")
+      content.find('.buy').remove()
+    $(@el).html(content)
     @
 
   buy: (e) ->
