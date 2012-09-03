@@ -5,7 +5,6 @@ class Spinoff.Models.Company extends Backbone.Model
   initialize: (options, programs) ->
     @programs = new Spinoff.Collections.ProgramsCollection(programs)
     @programs.url = "/api/v1/companies/#{@.get('id')}/programs"
-    @programs.bind('reset', @updateCounts)
     super(options)
 
   defaults:

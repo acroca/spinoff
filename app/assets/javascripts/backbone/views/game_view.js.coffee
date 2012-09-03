@@ -9,10 +9,13 @@ class Spinoff.Views.GameView extends Backbone.View
     "click .available-programs": "availablePrograms"
 
   initialize: (options) ->
+    @companyDetailView = new Spinoff.Views.CompanyDetailView
+      model: company
 
   render: ->
     $(@el).empty()
     $(@el).html(@template(company: window.company))
+    @$('.company-detail').html(@companyDetailView.render().el)
     @
 
   resetSubview: ->
