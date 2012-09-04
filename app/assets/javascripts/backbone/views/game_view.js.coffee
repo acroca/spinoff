@@ -10,7 +10,7 @@ class Spinoff.Views.GameView extends Backbone.View
       model: company
 
   render: ->
-    $(@el).empty()
+#    $(@el).empty()
     $(@el).html(@template(company: window.company))
     @$('.company-detail').html(@companyDetailView.render().el)
     @
@@ -28,3 +28,10 @@ class Spinoff.Views.GameView extends Backbone.View
         view = new Spinoff.Views.AvailableProgramsView
           collection: programsCollection
         @setSubview(view.render().el)
+
+
+  myPrograms: ->
+    @resetSubview()
+    view = new Spinoff.Views.MyProgramsView
+      collection: company.programs
+    @setSubview(view.render().el)

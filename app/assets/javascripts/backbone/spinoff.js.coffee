@@ -24,5 +24,7 @@ $ ->
     $('#game').data('user-company-json'),
     $('#game').data('user-company-programs-json')
   )
-  router = new Spinoff.Routers.SpinoffRouter()
+  gameView = new Spinoff.Views.GameView()
+  gameView.render()
+  router = new Spinoff.Routers.SpinoffRouter(gameView: gameView)
   Backbone.history.start({root: '/game'})
