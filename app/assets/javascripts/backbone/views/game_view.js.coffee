@@ -35,3 +35,11 @@ class Spinoff.Views.GameView extends Backbone.View
     view = new Spinoff.Views.MyProgramsView
       collection: company.programs
     @setSubview(view.render().el)
+
+  schedule: ->
+    @resetSubview()
+    slotsCollection.fetch
+      success: =>
+        view = new Spinoff.Views.ScheduleView
+          collection: slotsCollection
+        @setSubview(view.render().el)
