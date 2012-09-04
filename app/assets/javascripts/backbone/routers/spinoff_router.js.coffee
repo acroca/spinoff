@@ -7,7 +7,8 @@ class Spinoff.Routers.SpinoffRouter extends Backbone.Router
     "available-programs": "availablePrograms"
 
   main: ->
-    @view.render()
+    @view.render() unless @rendered
+    @rendered = true
 
   availablePrograms: ->
     @view.availablePrograms()
