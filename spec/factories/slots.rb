@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :slot do
-    company_id 1
-    program_id 1
-    day 1
+    association :company, factory: :company
+    association :program, factory: :movie
+    day  1
     time 1
   end
 end

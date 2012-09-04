@@ -5,4 +5,6 @@ class Slot < ActiveRecord::Base
   validates_numericality_of :time, greater_than_or_equal_to: 0, less_than_or_equal_to: 11
   validates_uniqueness_of :time, scope: [:company_id, :day]
 
+  belongs_to :company
+  belongs_to :program
 end

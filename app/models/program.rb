@@ -6,6 +6,7 @@ class Program < ActiveRecord::Base
   ]
 
   belongs_to :company
+  has_many :slots
 
   validates_presence_of :name
   validates_uniqueness_of :name

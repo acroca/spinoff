@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
 
   belongs_to :user
   has_many :programs
+  has_many :slots
 
   validates_presence_of :name
   validates_numericality_of :money
