@@ -1,3 +1,9 @@
-== SpinOff
+= SpinOff
 
-This is a Web based game where the players will have to manage a TV channel.
+This is a Web based game where the players will have to manage a TV channel. Demo site: http://spinoff.herokuapp.com
+
+== Existing features
+
+- Sign Up/Sign In (Devise)
+- Get the list of programs available to buy
+- Buy programs
