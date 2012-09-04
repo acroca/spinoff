@@ -3,7 +3,6 @@ class Spinoff.Models.Slot extends Backbone.Model
   paramRoot: 'slot'
 
   defaults:
-    company_id: null
     program_id: null
     day: null
     time: null
