@@ -29,7 +29,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       e.data = e.target
 
     @$(".empty-slot").
-      bind("dragover", -> (e.preventDefault() if (e.preventDefault))).
+      bind("dragover", (e) -> (e.preventDefault() if (e.preventDefault))).
       bind("dragenter", -> (false))
 
     @
