@@ -22,4 +22,19 @@ describe Audience do
       genres.values.sum.should be_between(0.9998, 1.001)
     end
   end
+
+  describe ".distribute_audience" do
+    let(:programs) { [create(:movie, popularity: 11, genre: Genre::GENRES.first),
+                      create(:movie, popularity: 19, genre: Genre::GENRES.first),
+                      create(:movie, popularity: 1, genre: Genre::GENRES.second)] }
+    let(:time) { 0 }
+    let(:slots) { programs.map{|p| create(:slot, program: p, company_id: p.company_id, time: time) } }
+
+    it "distributes the audience" do
+      Audience.distribute(people: 10000, time: time, slots: slots)
+      slots.first.reload.audience.should  == (10000 * Audience.ratio(time, Genre::GENRES.first) * (11/30.0)).to_i
+      slots.second.reload.audience.should == (10000 * Audience.ratio(time, Genre::GENRES.first) * (19/30.0)).to_i
+      slots.third.reload.audience.should  == (10000 * Audience.ratio(time, Genre::GENRES.second)).to_i
+    end
+  end
 end
