@@ -2,6 +2,7 @@
   <%= JST["backbone/templates/stars"]({rating: program.popularityPercent}) %>
   <%= program.get("name") %>
 </td>
+<td><%= program.get("genre") %></td>
 <td><%= program.get("type") %></td>
 <td>$<%= program.get("price") %></td>
 <td><a href="#" class="buy">Buy this program</a></td>

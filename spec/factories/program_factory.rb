@@ -3,6 +3,7 @@ FactoryGirl.define do
     sequence :name do |n|
       "Company #{n}"
     end
+    genre 'action'
   end
 
   factory(:movie, class: "Movie", parent: :program)

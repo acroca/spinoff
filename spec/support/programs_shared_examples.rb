@@ -49,5 +49,9 @@ shared_examples_for "a program subclass" do
     it 'has popularity' do
       subject.popularity.should > 0
     end
+
+    it 'has genre' do
+      Genre::GENRES.should include(subject.genre)
+    end
   end
 end

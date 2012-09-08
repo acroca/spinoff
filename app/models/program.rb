@@ -19,6 +19,7 @@ class Program < ActiveRecord::Base
     program = self.new(name: random_name)
     program.available = true
     program.popularity = rand(998) + 1
+    program.genre = Genre::GENRES.sample
     program.save
     program
   end

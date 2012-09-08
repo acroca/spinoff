@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908095716) do
+ActiveRecord::Schema.define(:version => 20120908155450) do
 
   create_table "companies", :force => true do |t|
     t.integer "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20120908095716) do
     t.boolean "available",  :default => false
     t.string  "type"
     t.integer "popularity", :default => 1
+    t.string  "genre"
   end
 
   add_index "programs", ["company_id"], :name => "index_programs_on_company_id"

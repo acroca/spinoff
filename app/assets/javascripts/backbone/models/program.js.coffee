@@ -8,6 +8,7 @@ class Spinoff.Models.Program extends Backbone.Model
   defaults:
     name: null
     available: null
+    genre: null
     type: null
     price: null
     popularity: null
