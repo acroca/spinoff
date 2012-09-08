@@ -46,14 +46,8 @@ shared_examples_for "a program subclass" do
       subject.name.should == "Random"
     end
 
-    it 'has price' do
-      subject.price.should >= 100
+    it 'has popularity' do
+      subject.popularity.should > 0
     end
-  end
-
-  describe ".as_json" do
-    let(:object) { create(described_class.to_s.underscore.to_sym) }
-    subject { object.as_json }
-    it { should == {id: object.to_param, name: object.name} }
   end
 end

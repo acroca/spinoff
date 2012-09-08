@@ -1,3 +1,6 @@
-<td><%= program.get("name") %></td>
+<td>
+  <%= JST["backbone/templates/stars"]({rating: program.popularityPercent}) %>
+  <%= program.get("name") %>
+</td>
 <td><%= program.get("type") %></td>
 

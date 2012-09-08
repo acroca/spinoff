@@ -1,3 +1,3 @@
 collection @programs
-attributes :id, :name, :price, :type
+attributes :id, :name, :price, :popularity, :type
 

@@ -2,11 +2,15 @@ class Spinoff.Models.Program extends Backbone.Model
   urlRoot: "/api/v1/programs"
   paramRoot: 'program'
 
+  initialize: (options) ->
+    @popularityPercent = parseInt(options.popularity,10)/10.0
+
   defaults:
     name: null
     available: null
     type: null
     price: null
+    popularity: null
     company_id: null
 
 

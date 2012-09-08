@@ -9,7 +9,7 @@ describe Company do
   it { should     allow_value(60).for(:money) }
   it { should     allow_value(-1).for(:money) }
   it { should_not allow_value(nil).for(:money) }
-  its(:money) { should == 0 }
+  its(:money) { should == 100000 }
 
   it { should allow_value([create(:movie)]).for(:programs) }
   it { should allow_value([create(:documentary)]).for(:programs) }
@@ -21,7 +21,7 @@ describe Company do
   end
 
   describe ".buy" do
-    let(:program) { create :movie, available: true, price: 100 }
+    let(:program) { create :movie, available: true, popularity: 100 }
     let(:company) { create :company, money: 300 }
 
     it "gives the program to the company" do
@@ -33,7 +33,7 @@ describe Company do
     it 'takes the money of the company' do
       expect{
         company.buy(program)
-      }.to change{company.reload.money}.from(300).to(200)
+      }.to change{company.reload.money}.by(-program.price)
     end
 
     it "marks the program as not available" do

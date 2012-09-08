@@ -16,3 +16,41 @@
   display: inline-block;
   margin-right: 20px;
 }
+
+.popularity{
+  width: 90px;
+  text-align: right;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 4px;
+}
+.slots .popularity { display: block; }
+.popularity small{
+  font-size: 70%;
+}
+.popularity .stars{
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  color: #e5e5e5;
+  letter-spacing: -2px
+}
+.popularity .stars .fill{
+  /*border: 1px solid red;*/
+  position: absolute;
+  display: inline;
+  overflow: hidden;
+
+  height: auto;
+  color: #ffba00;
+  top: 0;
+  left: 0;
+}
+.popularity .stars .fill > div {
+  position: relative;
+  width: 6em;
+}

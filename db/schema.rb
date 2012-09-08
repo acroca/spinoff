@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904141327) do
+ActiveRecord::Schema.define(:version => 20120908095716) do
 
   create_table "companies", :force => true do |t|
     t.integer "user_id"
     t.string  "name"
-    t.integer "money",   :default => 0
+    t.integer "money",   :default => 100000
   end
 
   add_index "companies", ["user_id"], :name => "index_companies_on_user_id", :unique => true
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20120904141327) do
     t.string  "name"
     t.boolean "available",  :default => false
     t.string  "type"
-    t.integer "price"
+    t.integer "popularity", :default => 1
   end
 
   add_index "programs", ["company_id"], :name => "index_programs_on_company_id"

@@ -4,11 +4,12 @@
   <% for(i in programs){ %>
     <div draggable='true' data-program-id="<%= programs[i].get("id") %>">
       <span class="icon-move"></span>
+      <%= JST["backbone/templates/stars"]({rating: programs[i].popularityPercent}) %>
       <%= programs[i].get("name") %>
     </div>
   <% } %>
 </div>
-<table class="table table-striped">
+<table class="table table-striped slots">
   <thead>
     <tr>
       <th>Time</th>

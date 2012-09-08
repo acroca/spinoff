@@ -18,16 +18,13 @@ class Program < ActiveRecord::Base
   def self.generate
     program = self.new(name: random_name)
     program.available = true
-    program.price = rand(9_900) + 100
+    program.popularity = rand(998) + 1
     program.save
     program
   end
 
-  def as_json(*args)
-    {
-      id: self.to_param,
-      name: self.name
-    }
+  def price
+    (popularity ** 1.42).round
   end
 
   private
