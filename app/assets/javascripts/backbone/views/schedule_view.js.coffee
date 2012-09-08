@@ -1,20 +1,27 @@
 class Spinoff.Views.ScheduleView extends Backbone.View
   template: JST["backbone/templates/schedule"]
 
+  initialize: ->
+    slotsCollection.bind 'add', @addSlot, @
+
+  addSlot: (slot) ->
+    slotView = new Spinoff.Views.SlotView(model: slot)
+    @$(".slot-#{slot.get('day')}-#{slot.get('time')}").html(slotView.render().el)
+
   events:
     "submit form": "createSlot"
 
   render: ->
     currentDay = $("#game").data('current-day')
-    $(@el).html(@template(days: [currentDay...(currentDay+5)]))
+    rendered = @template
+      days: [currentDay...(currentDay+5)]
+      times: [0..11]
+    $(@el).html(rendered)
     @loadPrograms()
 
-    for slotsContainer in @$(".slots-container")
-      $slotsContainer = $(slotsContainer)
-      day = $slotsContainer.data('day')
-      for time in [0..11]
-        view = new Spinoff.Views.SlotView(day: day, time: time, collection: slotsCollection)
-        $slotsContainer.append view.render().el
+    for slot in slotsCollection.models
+      @addSlot(slot)
+
     @
 
   loadPrograms: ->
@@ -35,23 +42,9 @@ class Spinoff.Views.ScheduleView extends Backbone.View
 
 class Spinoff.Views.SlotView extends Backbone.View
   template: JST["backbone/templates/slot"]
-  tagName: 'div'
-  className: 'row'
 
-  initialize: (options) ->
-    @day = options.day
-    @time = options.time
-    @collection.bind 'change', @checkAndRender, @
-    @model = @collection.where(day: @day, time: @time)[0]
-    super(options)
-
-  checkAndRender: ->
-    newModel = @collection.where(day: @day, time: @time)[0]
-    if newModel && newModel != @model
-      @model = newModel
-      @render()
   render: ->
-    content = $(@template(slot: @model, day: @day, time: @time))
+    content = $(@template(slot: @model))
     $(@el).html(content)
     @
 

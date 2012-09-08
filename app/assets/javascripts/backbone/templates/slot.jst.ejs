@@ -1,7 +1,3 @@
-<div class="span2"><div class="well well-small">
-  <% if(slot) { %>
-    <%= slot.program.get("name") %>
-  <% } else { %>
-    <i>- Available -</i>
-  <% } %>
-</div></div>
+<div class="slot">
+  <%= slot.program.get("name") %>
+</div>

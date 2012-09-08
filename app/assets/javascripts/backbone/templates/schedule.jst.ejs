@@ -7,9 +7,25 @@
   <button type="submit" class="btn">Create slot</button>
 
 </form>
-<div class="row">
-  <% for(day in days) { %>
-    <div class="span2 slots-container" data-day="<%= day %>">
-    </div>
-  <% } %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <% for(day in days) { %>
+        <th>Day <%= day %></th>
+      <% } %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for(time in times) { %>
+      <tr>
+        <td><%= time %></td>
+        <% for(day in days) { %>
+          <td class="slot-<%= day %>-<%= time %>">
+            - Available -
+          </td>
+        <% } %>
+      </tr>
+    <% } %>
 </div>
