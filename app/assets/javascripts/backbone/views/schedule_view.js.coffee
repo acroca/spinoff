@@ -16,7 +16,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
   render: ->
     currentDay = $("#game").data('current-day')
     rendered = @template
-      days: [currentDay...(currentDay+5)]
+      days: [currentDay...(currentDay+3)]
       times: [0..11]
       programs: company.programs.models
     $(@el).html(rendered)

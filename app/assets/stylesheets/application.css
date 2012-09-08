@@ -25,7 +25,6 @@
   display: inline-block;
   margin-right: 4px;
 }
-.slots .popularity { display: block; }
 .popularity small{
   font-size: 70%;
 }
