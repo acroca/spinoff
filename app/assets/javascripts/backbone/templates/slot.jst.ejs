@@ -1,5 +1,7 @@
-<td><%= slot.get("company_id") %></td>
-<td><%= slot.get("program_id") %></td>
-<td><%= slot.get("day") %></td>
-<td><%= slot.get("time") %></td>
-
+<div class="span2"><div class="well well-small">
+  <% if(slot) { %>
+    <%= slot.program.get("name") %>
+  <% } else { %>
+    <i>- Available -</i>
+  <% } %>
+</div></div>

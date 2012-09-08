@@ -2,6 +2,10 @@ class Spinoff.Models.Slot extends Backbone.Model
   urlRoot: "/api/v1/slots"
   paramRoot: 'slot'
 
+  initialize: (options)->
+    @program = company.programs.where(id: options.program_id)[0]
+    super(options)
+
   defaults:
     program_id: null
     day: null

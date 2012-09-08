@@ -7,16 +7,9 @@
   <button type="submit" class="btn">Create slot</button>
 
 </form>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Company id</th>
-      <th>Program id</th>
-      <th>Day</th>
-      <th>Time</th>
-    </tr>
-  <thead>
-  <tbody>
-  </tbody>
-</table>
-
+<div class="row">
+  <% for(day in days) { %>
+    <div class="span2 slots-container" data-day="<%= day %>">
+    </div>
+  <% } %>
+</div>
