@@ -31,7 +31,7 @@ describe Audience do
     let(:slots) { programs.map{|p| create(:slot, program: p, company_id: p.company_id, time: time) } }
 
     it "distributes the audience" do
-      Audience.distribute(people: 10000, time: time, slots: slots)
+      Audience.distribute(population: 10000, time: time, slots: slots)
       slots.first.reload.audience.should  == (10000 * Audience.ratio(time, Genre::GENRES.first) * (11/30.0)).to_i
       slots.second.reload.audience.should == (10000 * Audience.ratio(time, Genre::GENRES.first) * (19/30.0)).to_i
       slots.third.reload.audience.should  == (10000 * Audience.ratio(time, Genre::GENRES.second)).to_i

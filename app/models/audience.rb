@@ -20,14 +20,14 @@ class Audience
 
   def self.distribute(options)
     time   = options[:time]
-    people = options[:people]
+    population = options[:population]
 
     slots_by_genre = options[:slots].group_by{ |slot| slot.program.genre }
 
     slots_by_genre.each do |genre, slots|
       total_popularity = slots.map { |slot| slot.program.popularity }.sum.to_f
       slots.each do |slot|
-        slot.audience = (people * ratio(time, genre) * (slot.program.popularity/total_popularity))
+        slot.audience = (population * ratio(time, genre) * (slot.program.popularity/total_popularity))
         slot.save
       end
     end

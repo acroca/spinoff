@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908161055) do
+ActiveRecord::Schema.define(:version => 20120908163414) do
 
   create_table "companies", :force => true do |t|
     t.integer "user_id"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(:version => 20120908161055) do
   end
 
   add_index "companies", ["user_id"], :name => "index_companies_on_user_id", :unique => true
+
+  create_table "config_variables", :id => false, :force => true do |t|
+    t.string "key"
+    t.string "value"
+  end
+
+  add_index "config_variables", ["key"], :name => "index_config_variables_on_key", :unique => true
 
   create_table "programs", :force => true do |t|
     t.integer "company_id"

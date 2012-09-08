@@ -2,7 +2,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
   template: JST["backbone/templates/schedule"]
 
   initialize: ->
-    slotsCollection.bind 'add', @addSlot, @
+    slotsCollection.bind 'sync', @addSlot, @
 
   addSlot: (slot) ->
     slotView = new Spinoff.Views.SlotView(model: slot)
@@ -41,7 +41,11 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       day: slotCell.data('day')
       time: slotCell.data('time')
       program_id: program_id
-    slot = slotsCollection.create(slotAttrs)
+    slot = slotsCollection.create slotAttrs,
+      error: (slot,response) ->
+        errors = JSON.parse(response.responseText)
+        alert("Wrong slot") if errors.time
+        slotsCollection.remove(slot)
 
 class Spinoff.Views.SlotView extends Backbone.View
   template: JST["backbone/templates/slot"]

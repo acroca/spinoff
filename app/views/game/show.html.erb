@@ -5,7 +5,8 @@
      data-user-token="<%= current_user.authentication_token %>"
      data-user-company-json="<%= render 'company.json.rabl' %>"
      data-user-company-programs-json="<%= render 'programs.json.rabl' %>"
-     data-current-day="0">
+     data-current-day="<%= ConfigVariables[:day] %>"
+     data-current-time="<%= ConfigVariables[:time] %>">
 
   <h2>
     Starting game...

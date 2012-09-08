@@ -14,7 +14,7 @@
     <tr>
       <th>Time</th>
       <% for(day in days) { %>
-        <th>Day <%= day %></th>
+        <th>Day <%= days[day] %></th>
       <% } %>
     </tr>
   </thead>
@@ -24,7 +24,7 @@
       <tr>
         <td><%= time %></td>
         <% for(day in days) { %>
-          <td class="empty-slot slot-<%= day %>-<%= time %>" data-day="<%= day %>" data-time="<%= time %>">
+          <td class="empty-slot slot-<%= days[day] %>-<%= times[time] %>" data-day="<%= days[day] %>" data-time="<%= times[time] %>">
             - Available -
           </td>
         <% } %>
