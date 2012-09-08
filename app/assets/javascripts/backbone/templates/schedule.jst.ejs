@@ -1,12 +1,13 @@
 <h3>My schedule</h3>
-<form action="#" class="form-inline">
-  <input type="text" name="day" placeholder="Day" class="input-small" />
-  <input type="text" name="time" placeholder="Time" class="input-small" />
-  <select name="program_id" data-placeholder="Choose a Program..."></select>
-
-  <button type="submit" class="btn">Create slot</button>
-
-</form>
+<div class="programs well">
+  <h4>My programs</h4>
+  <% for(i in programs){ %>
+    <div draggable='true' data-program-id="<%= programs[i].get("id") %>">
+      <span class="icon-move"></span>
+      <%= programs[i].get("name") %>
+    </div>
+  <% } %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -22,7 +23,7 @@
       <tr>
         <td><%= time %></td>
         <% for(day in days) { %>
-          <td class="slot-<%= day %>-<%= time %>">
+          <td class="empty-slot slot-<%= day %>-<%= time %>" data-day="<%= day %>" data-time="<%= time %>">
             - Available -
           </td>
         <% } %>

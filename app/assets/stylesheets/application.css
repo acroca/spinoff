@@ -11,3 +11,8 @@
  *= require_self
  *= require bootstrap_and_overrides
  */
+
+.programs > div[data-program-id] {
+  display: inline-block;
+  margin-right: 20px;
+}

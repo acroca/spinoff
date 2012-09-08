@@ -3,7 +3,7 @@ class Spinoff.Models.Slot extends Backbone.Model
   paramRoot: 'slot'
 
   initialize: (options)->
-    @program = company.programs.where(id: options.program_id)[0]
+    @program = company.programs.get(options.program_id)
     super(options)
 
   defaults:

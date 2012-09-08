@@ -6,39 +6,42 @@ class Spinoff.Views.ScheduleView extends Backbone.View
 
   addSlot: (slot) ->
     slotView = new Spinoff.Views.SlotView(model: slot)
-    @$(".slot-#{slot.get('day')}-#{slot.get('time')}").html(slotView.render().el)
+    @$(".slot-#{slot.get('day')}-#{slot.get('time')}").
+      html(slotView.render().el).
+      removeClass('empty-slot')
 
   events:
-    "submit form": "createSlot"
+    "drop .empty-slot": "createSlot"
 
   render: ->
     currentDay = $("#game").data('current-day')
     rendered = @template
       days: [currentDay...(currentDay+5)]
       times: [0..11]
+      programs: company.programs.models
     $(@el).html(rendered)
-    @loadPrograms()
 
     for slot in slotsCollection.models
       @addSlot(slot)
 
+    @$("[draggable]").bind "dragstart", (e) ->
+      e.originalEvent.dataTransfer.setData('product_id', $(e.target).data('program-id'))
+      e.data = e.target
+
+    @$(".empty-slot").
+      bind("dragover", -> (e.preventDefault() if (e.preventDefault))).
+      bind("dragenter", -> (false))
+
     @
 
-  loadPrograms: ->
-    selectElement = @$('form select')
-    for program in company.programs.models
-      selectElement.append($("<option>", value: program.get("id")).text(program.get("name")))
-
-  createSlot: (e) ->
-    e.preventDefault()
-    form = @$('form')
+  createSlot: (e)->
+    program_id = parseInt(e.originalEvent.dataTransfer.getData("product_id"), 10)
+    slotCell = $(e.target)
     slotAttrs =
-      day: parseInt(form.find('[name=day]').val())
-      time: parseInt(form.find('[name=time]').val())
-      program_id: parseInt(form.find('[name=program_id]').val())
+      day: slotCell.data('day')
+      time: slotCell.data('time')
+      program_id: program_id
     slot = slotsCollection.create(slotAttrs)
-    form[0].reset()
-    false
 
 class Spinoff.Views.SlotView extends Backbone.View
   template: JST["backbone/templates/slot"]
