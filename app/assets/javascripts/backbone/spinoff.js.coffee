@@ -20,11 +20,15 @@ $.ajaxSetup
 
 $ ->
   $ = jQuery
+  $game = $("#game")
   window.company = new Spinoff.Models.Company(
-    $('#game').data('user-company-json'),
-    $('#game').data('user-company-programs-json')
+    $game.data('user-company-json'),
+    $game.data('user-company-programs-json')
   )
   gameView = new Spinoff.Views.GameView()
   gameView.render()
   router = new Spinoff.Routers.SpinoffRouter(gameView: gameView)
   Backbone.history.start({root: '/game'})
+
+  window.currentDay = $game.data('current-day')
+  window.currentTime = $game.data('current-time')

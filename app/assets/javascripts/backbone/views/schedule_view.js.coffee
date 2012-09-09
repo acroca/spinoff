@@ -14,12 +14,21 @@ class Spinoff.Views.ScheduleView extends Backbone.View
     "drop .empty-slot": "createSlot"
 
   render: ->
-    currentDay = $("#game").data('current-day')
     rendered = @template
       days: [currentDay...(currentDay+3)]
       times: [0..11]
       programs: company.programs.models
     $(@el).html(rendered)
+
+    @$("[data-day='#{currentDay}']").each ->
+      slot = $(this)
+      if parseInt(slot.data("time"), 10) <= currentTime
+        slot.
+          addClass('past').
+          removeClass('empty-slot').
+          empty().
+          attr('dropable', undefined)
+
 
     for slot in slotsCollection.models
       @addSlot(slot)
