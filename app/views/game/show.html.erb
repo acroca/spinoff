@@ -6,7 +6,8 @@
      data-user-company-json="<%= render 'company.json.rabl' %>"
      data-user-company-programs-json="<%= render 'programs.json.rabl' %>"
      data-current-day="<%= ConfigVariables[:day] %>"
-     data-current-time="<%= ConfigVariables[:time] %>">
+     data-current-time="<%= ConfigVariables[:time] %>"
+     data-genres-by-time="<%= Audience::GENRES_BY_TIME.to_json %>">
 
   <h2>
     Starting game...

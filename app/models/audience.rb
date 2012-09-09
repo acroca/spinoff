@@ -8,6 +8,7 @@ class Audience
     ratios.each do |population, ratio|
       PREFERENCES[population].map do |genre, preference|
         genres[genre] += preference * ratio
+        genres[genre] = genres[genre].round(4)
       end
     end
     acc[time] = genres

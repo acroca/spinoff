@@ -21,14 +21,25 @@ class Spinoff.Views.ScheduleView extends Backbone.View
     $(@el).html(rendered)
 
     @$("[data-day='#{currentDay}']").each ->
-      slot = $(this)
-      if parseInt(slot.data("time"), 10) <= currentTime
-        slot.
+      $slot = $(this)
+      if parseInt($slot.data("time"), 10) <= currentTime
+        $slot.
           addClass('past').
           removeClass('empty-slot').
           empty().
           attr('dropable', undefined)
 
+    @$("[data-time-tooltip]").each ->
+      $element = $(this)
+      time = $element.data("time-tooltip")
+      title = _.map genresByTime[time], (k, v) ->
+        percent = parseInt((k*100), 10)
+        "#{percent}% #{v}"
+      $element.tooltip
+        title: title.join('<br/>')
+        html: true
+        placement: 'left'
+        trigger: 'hover'
 
     for slot in slotsCollection.models
       @addSlot(slot)

@@ -30,5 +30,6 @@ $ ->
   router = new Spinoff.Routers.SpinoffRouter(gameView: gameView)
   Backbone.history.start({root: '/game'})
 
+  window.genresByTime = $game.data('genres-by-time')
   window.currentDay = $game.data('current-day')
   window.currentTime = $game.data('current-time')
