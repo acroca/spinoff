@@ -28,7 +28,7 @@ class Audience
       total_popularity = slots.map { |slot| slot.program.popularity }.sum.to_f
       slots.each do |slot|
         slot.audience = (population * ratio(time, genre) * (slot.program.popularity/total_popularity))
-        slot.save
+        slot.save!
       end
     end
   end
