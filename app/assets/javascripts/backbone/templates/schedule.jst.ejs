@@ -22,7 +22,10 @@
   <tbody>
     <% for(time in times) { %>
       <tr>
-        <td data-time-tooltip="<%= time %>"><%= time %></td>
+        <td data-time-tooltip="<%= time %>">
+          <i class="icon-info-sign"></i>
+          <%= time %>
+        </td>
         <% for(day in days) { %>
           <td class="empty-slot slot slot-<%= days[day] %>-<%= times[time] %>" data-day="<%= days[day] %>" data-time="<%= times[time] %>">
             - Available -

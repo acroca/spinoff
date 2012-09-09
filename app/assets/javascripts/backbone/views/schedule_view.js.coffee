@@ -35,7 +35,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       title = _.map genresByTime[time], (k, v) ->
         percent = parseInt((k*100), 10)
         "#{percent}% #{v}"
-      $element.tooltip
+      $element.find("i").tooltip
         title: title.join('<br/>')
         html: true
         placement: 'left'
