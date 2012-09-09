@@ -20,6 +20,9 @@ Spinoff::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Sets a very high cache time for assets
+  config.static_cache_control = "public, max-age=31536000"
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
