@@ -8,6 +8,7 @@ class Spinoff.Models.Slot extends Backbone.Model
 
   defaults:
     program_id: null
+    audience: null
     day: null
     time: null
 

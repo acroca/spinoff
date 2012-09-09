@@ -1,4 +1,7 @@
 <div>
   <%= JST["backbone/templates/stars"]({rating: slot.program.popularityPercent}) %>
   <%= slot.program.get("name") %>
+  <% if(slot.get("audience")){ %>
+    <p>You've got <%= slot.get("audience") %> views</p>
+  <% } %>
 </div>
