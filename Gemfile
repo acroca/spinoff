@@ -8,6 +8,7 @@ gem 'rabl', "~> 0.7"
 gem 'yajl-ruby', "~> 1.1"
 gem "rails-backbone", "~> 0.7"
 gem "devise", "~> 2.1"
+gem "pusher", "~> 0.9"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2'
@@ -23,6 +24,10 @@ group :development, :test do
   gem 'factory_girl_rails', "~> 3.0"
   #gem 'capybara', "~> 1.1"
   gem 'jasmine', "~> 1.2"
+end
+
+group :development do
+  gem "thin", "~> 1.4"
 end
 
 group :production do

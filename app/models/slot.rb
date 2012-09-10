@@ -24,6 +24,7 @@ class Slot < ActiveRecord::Base
     end
     ConfigVariables[:day] = day
     ConfigVariables[:time] = time
+    Pusher["spinoff"].trigger("game-tick", {day: day, time: time})
   end
 
   private

@@ -3,6 +3,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
 
   initialize: ->
     slotsCollection.bind 'sync', @addSlot, @
+    configVariables.bind 'change', @render, @
 
   addSlot: (slot) ->
     slotView = new Spinoff.Views.SlotView(model: slot)
@@ -15,15 +16,16 @@ class Spinoff.Views.ScheduleView extends Backbone.View
     "click .select-program": "createSlot"
 
   render: ->
+    today = configVariables.get("day")
     rendered = @template
-      days: [currentDay...(currentDay+3)]
+      days: [today...(today+3)]
       times: [0..11]
       programs: company.programs.models
     $(@el).html(rendered)
 
-    @$("[data-day='#{currentDay}']").each ->
+    @$("[data-day='#{today}']").each ->
       $slot = $(this)
-      if parseInt($slot.data("time"), 10) <= currentTime
+      if parseInt($slot.data("time"), 10) <= configVariables.get("time")
         $slot.
           addClass('past').
           removeClass('empty-slot').
@@ -32,7 +34,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
     @$("[data-time-tooltip]").each ->
       $element = $(this)
       time = $element.data("time-tooltip")
-      title = _.map genresByTime[time], (k, v) ->
+      title = _.map configVariables.get("genresByTime")[time], (k, v) ->
         percent = parseInt((k*100), 10)
         "#{percent}% #{v}"
       $element.find("i").tooltip

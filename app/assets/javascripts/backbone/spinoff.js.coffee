@@ -30,6 +30,14 @@ $ ->
   router = new Spinoff.Routers.SpinoffRouter(gameView: gameView)
   Backbone.history.start({root: '/game'})
 
-  window.genresByTime = $game.data('genres-by-time')
-  window.currentDay = $game.data('current-day')
-  window.currentTime = $game.data('current-time')
+  window.configVariables = new Spinoff.Models.ConfigVariables $game.data('current-configuration')
+
+  pusher = new Pusher($game.data('pusher-key'))
+  channel = pusher.subscribe('spinoff')
+  channel.bind 'force-reload', () ->
+    alert("Please reload the page.")
+
+  channel.bind 'game-tick', (data) ->
+    window.configVariables.set
+      day: data.day
+      time: data.time
