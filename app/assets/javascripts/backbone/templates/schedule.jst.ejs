@@ -1,14 +1,4 @@
 <h3>My schedule</h3>
-<div class="programs well">
-  <h4>My programs</h4>
-  <% for(i in programs){ %>
-    <div draggable='true' data-program-id="<%= programs[i].get("id") %>">
-      <span class="icon-move"></span>
-      <%= JST["backbone/templates/stars"]({rating: programs[i].popularityPercent}) %>
-      <%= programs[i].get("name") %>
-    </div>
-  <% } %>
-</div>
 <table class="table table-striped slots">
   <thead>
     <tr>
@@ -28,9 +18,24 @@
         </td>
         <% for(day in days) { %>
           <td class="empty-slot slot slot-<%= days[day] %>-<%= times[time] %>" data-day="<%= days[day] %>" data-time="<%= times[time] %>">
-            - Available -
+            <button class="set-slot btn btn-small" type="button">Set program</button>
           </td>
         <% } %>
       </tr>
     <% } %>
+</div>
+
+<div class="modal hide" id="programsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <% for(program in programs){ %>
+      <p>
+        <%= JST["backbone/templates/stars"]({rating: programs[program].popularityPercent}) %>
+        <a class="select-program" data-program-id="<%= programs[program].get("id") %>" href="#" data-dismiss="modal" aria-hidden="true"><%= programs[program].get("name") %></a>
+      </p>
+    <% } %>
+  </div>
 </div>

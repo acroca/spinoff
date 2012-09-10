@@ -11,7 +11,8 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       removeClass('empty-slot')
 
   events:
-    "drop .empty-slot": "createSlot"
+    "click .set-slot": "openSlotModal"
+    "click .select-program": "createSlot"
 
   render: ->
     rendered = @template
@@ -26,8 +27,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
         $slot.
           addClass('past').
           removeClass('empty-slot').
-          empty().
-          attr('dropable', undefined)
+          empty()
 
     @$("[data-time-tooltip]").each ->
       $element = $(this)
@@ -38,29 +38,29 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       $element.find("i").tooltip
         title: title.join('<br/>')
         html: true
-        placement: 'left'
+        placement: 'right'
         trigger: 'hover'
+
 
     for slot in slotsCollection.models
       @addSlot(slot)
 
-    @$("[draggable]").bind "dragstart", (e) ->
-      e.originalEvent.dataTransfer.setData('product_id', $(e.target).data('program-id'))
-      e.data = e.target
-
-    @$(".empty-slot").
-      bind("dragover", (e) -> (e.preventDefault() if (e.preventDefault))).
-      bind("dragenter", -> (false))
-
     @
 
+  openSlotModal: (e) ->
+    cell = $(e.target).parents('.slot')
+    @selectedCell =
+      day: cell.data("day")
+      time: cell.data("time")
+
+    $("#programsModal").modal
+      show: true
+
   createSlot: (e)->
-    program_id = parseInt(e.originalEvent.dataTransfer.getData("product_id"), 10)
-    slotCell = $(e.target)
     slotAttrs =
-      day: slotCell.data('day')
-      time: slotCell.data('time')
-      program_id: program_id
+      day: @selectedCell.day
+      time: @selectedCell.time
+      program_id: $(e.target).data("program-id")
     slot = slotsCollection.create slotAttrs,
       error: (slot,response) ->
         errors = JSON.parse(response.responseText)
