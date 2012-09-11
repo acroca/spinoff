@@ -2,8 +2,35 @@
 
 This is a Web based game where the players will have to manage a TV channel. Demo site: http://spinoff.herokuapp.com
 
-== Existing features
+The player will have to buy good programs (movies, series, ...) and schedule it to get as much audience as possible.
+At the same time they will have to schedule ads to get some money.
 
-- Sign Up/Sign In (Devise)
-- Get the list of programs available to buy
-- Buy programs
+== Time in game (Slots)
+
+In Spinoff every day has 12 slots to schedule some programs. When the 12 slots finishes it starts the next day.
+Every slot takes two real-time hours, so the days from Spinoff goes with the real days.
+
+Each user can assign only one program and one ad per slot. They can keep it empty as well.
+
+== Audience
+
+There's 4 types of population in the game, children, teenager, adult and elderly. For each time the amount of people of
+each type will vary. For example, at time 1 maybe the 60% of the population is adult but at time 4 it's 40%.
+
+Every population group have different preferences in terms of genres. Children use to watch cartoon but adults don't (in
+general).
+
+Based on the ratio of each type of population and the preferences of each one, for every game time there's a specific
+genres that will get more audience.
+
+After every game time (2h) the audience will watch the best channels following the preferences.
+
+Example:
+
+In the time 3 there's 20% children and only children likes cartoon. 80% of the children will watch cartoon for this
+time. So, from the total population, (20% * 80%) 16% of the audience will go for cartoon.
+
+Let's say there's only 2 users with cartoon scheduled at this time, one of the programs has popularity 60 and the other
+40. The channel with 60 popularity will get the 60% of the audience assigned to cartoon and the other one will get 40%,
+so the first one will get 9.6% of the total audience and the second one 6.4%.
+
