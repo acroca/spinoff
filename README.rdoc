@@ -8,7 +8,7 @@ At the same time they will have to schedule ads to get some money.
 == Time in game (Slots)
 
 In Spinoff every day has 12 slots to schedule some programs. When the 12 slots finishes it starts the next day.
-Every slot takes two real-time hours, so the days from Spinoff goes with the real days.
+Every slot takes one real-time hour, so every real day has two Spinoff days.
 
 Each user can assign only one program and one ad per slot. They can keep it empty as well.
 
@@ -23,7 +23,7 @@ general).
 Based on the ratio of each type of population and the preferences of each one, for every game time there's a specific
 genres that will get more audience.
 
-After every game time (2h) the audience will watch the best channels following the preferences.
+After every game time (1h) the audience will watch the best channels following the preferences.
 
 Example:
 
