@@ -54,10 +54,13 @@
   width: 6em;
 }
 
+.table-striped tbody tr .slot.current {
+  background-color: rgba(255, 100, 0, 0.22);
+}
 .slot.past {
   background-color: rgba(255, 238, 140, 0.22);
 }
 
-.table-striped tbody tr:nth-child(odd) .slot.past, .table-striped tbody tr:nth-child(odd) .slot.past {
+.table-striped tbody tr:nth-child(odd) .slot.past {
   background-color: rgba(255, 238, 140, 0.42);
 }

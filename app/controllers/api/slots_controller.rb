@@ -5,6 +5,16 @@ class Api::SlotsController < ApiController
     render :index
   end
 
+  def show
+    @company = current_user.company
+    @slot = @company.slots.where(id: params[:id]).first
+    unless @slot
+      render nothing: true, status: 401
+      return
+    end
+    render :show
+  end
+
   def create
     @slot = Slot.new params[:slot].extract!(:day, :time, :program_id)
     @slot.company = current_user.company

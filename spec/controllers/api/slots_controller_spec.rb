@@ -27,6 +27,33 @@ describe Api::SlotsController do
     end
   end
 
+  describe "GET '/api/v1/slots/1'" do
+    let(:user) { create(:user) }
+    let!(:slot) { create(:slot, company_id: user.company.id) }
+
+    before { sign_in user }
+
+    def do_request(s)
+      get :show, format: 'json', id: s.id
+    end
+
+    it "returns the slot information" do
+      do_request(slot)
+      response.status.should == 200
+      assigns(:slot).should == slot
+      response.should render_template("api/slots/show")
+    end
+
+    context "another slot" do
+      let!(:another_slot) { create(:slot) }
+      it "returns the slot information" do
+        do_request(another_slot)
+        response.status.should == 401
+      end
+    end
+
+  end
+
   describe "POST '/api/v1/slots'" do
     let(:user) { create(:user) }
 

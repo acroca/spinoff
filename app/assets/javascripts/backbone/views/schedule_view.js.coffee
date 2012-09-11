@@ -3,7 +3,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
 
   initialize: ->
     slotsCollection.bind 'sync', @addSlot, @
-    configVariables.bind 'change', @render, @
+    configVariables.bind 'change', @moveCurrentTime, @
 
   addSlot: (slot) ->
     slotView = new Spinoff.Views.SlotView(model: slot)
@@ -23,14 +23,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       programs: company.programs.models
     $(@el).html(rendered)
 
-    @$("[data-day='#{today}']").each ->
-      $slot = $(this)
-      if parseInt($slot.data("time"), 10) <= configVariables.get("time")
-        $slot.
-          addClass('past').
-          removeClass('empty-slot').
-          empty()
-
+    @moveCurrentTime()
     @$("[data-time-tooltip]").each ->
       $element = $(this)
       time = $element.data("time-tooltip")
@@ -48,6 +41,22 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       @addSlot(slot)
 
     @
+
+  moveCurrentTime: ->
+    today = configVariables.get("day")
+
+    @$("[data-day]").each ->
+      $slot = $(this)
+      currentTime = configVariables.get("time")
+      slotDay = parseInt($slot.data("day"), 10)
+      slotTime = parseInt($slot.data("time"), 10)
+
+      if slotDay < today || (slotDay == today && slotTime <= currentTime)
+        $slot.empty().removeClass('empty-slot') if $slot.hasClass("empty-slot")
+        if slotTime == currentTime && slotDay == today
+          $slot.addClass('current')
+        else
+          $slot.addClass('past').removeClass("current")
 
   openSlotModal: (e) ->
     cell = $(e.target).parents('.slot')
@@ -71,6 +80,9 @@ class Spinoff.Views.ScheduleView extends Backbone.View
 
 class Spinoff.Views.SlotView extends Backbone.View
   template: JST["backbone/templates/slot"]
+
+  initialize: () ->
+    @model.bind 'change', @render, @
 
   render: ->
     content = $(@template(slot: @model))

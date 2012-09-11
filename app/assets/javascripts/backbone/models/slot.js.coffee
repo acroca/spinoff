@@ -3,6 +3,7 @@ class Spinoff.Models.Slot extends Backbone.Model
   paramRoot: 'slot'
 
   initialize: (options)->
+    configVariables.bind 'change', @fetchIfAffected, @
     @program = company.programs.get(options.program_id)
     super(options)
 
@@ -11,6 +12,11 @@ class Spinoff.Models.Slot extends Backbone.Model
     audience: null
     day: null
     time: null
+
+  fetchIfAffected: (config) ->
+    if config.previous("day") == @get("day") && config.previous("time") == @get("time")
+      @fetch()
+
 
 class Spinoff.Collections.SlotsCollection extends Backbone.Collection
   model: Spinoff.Models.Slot
