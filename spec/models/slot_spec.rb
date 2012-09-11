@@ -56,5 +56,16 @@ describe Slot do
       Audience.should_receive(:distribute).with(hash_including(slots: [valid_slot]))
       Slot.tick
     end
+
+    it "publishes on Pusher" do
+      ConfigVariables[:time] = 1
+      ConfigVariables[:day] = 2
+
+      channel = double
+      Pusher.should_receive(:[]).with("spinoff") { channel }
+      channel.should_receive(:trigger).with('game-tick', {time: 2, day: 2})
+
+      Slot.tick
+    end
   end
 end
