@@ -64,6 +64,5 @@ module Spinoff
 
     config.assets.precompile += ['game.js']
 
-    config.logger = Logger.new(STDOUT)
   end
 end
