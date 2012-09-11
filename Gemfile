@@ -26,10 +26,6 @@ group :development, :test do
   gem 'jasmine', "~> 1.2"
 end
 
-group :development do
-  gem "thin", "~> 1.4"
-end
-
 group :production do
   gem 'unicorn', "~> 4.3"
   gem 'newrelic_rpm', "~> 3.4"
