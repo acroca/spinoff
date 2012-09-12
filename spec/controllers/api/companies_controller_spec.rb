@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::CompaniesController do
   describe "GET '/api/v1/companies/1'" do
-    let(:company) { create(:company) }
+    let(:company) { create(:user).company }
     def do_request
       get :show, id: company.id, format: 'json'
     end

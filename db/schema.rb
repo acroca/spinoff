@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908163414) do
+ActiveRecord::Schema.define(:version => 20120912150115) do
+
+  create_table "ad_contracts", :force => true do |t|
+    t.string   "advertiser"
+    t.integer  "price"
+    t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "companies", :force => true do |t|
     t.integer "user_id"

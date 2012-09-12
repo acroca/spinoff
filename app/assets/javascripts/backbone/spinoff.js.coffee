@@ -23,7 +23,8 @@ $ ->
   $game = $("#game")
   window.company = new Spinoff.Models.Company(
     $game.data('user-company-json'),
-    $game.data('user-company-programs-json')
+    $game.data('user-company-programs-json'),
+    $game.data('user-company-ad-contracts-json')
   )
   gameView = new Spinoff.Views.GameView()
   gameView.render()

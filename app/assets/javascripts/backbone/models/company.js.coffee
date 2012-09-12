@@ -2,7 +2,8 @@ class Spinoff.Models.Company extends Backbone.Model
   urlRoot: "/api/v1/companies"
   paramRoot: 'company'
 
-  initialize: (options, programs) ->
+  initialize: (options, programs, adContracts) ->
+    @adContracts = new Spinoff.Collections.AdContractsCollection(adContracts)
     @programs = new Spinoff.Collections.ProgramsCollection(programs)
     @programs.url = "/api/v1/companies/#{@.get('id')}/programs"
     super(options)

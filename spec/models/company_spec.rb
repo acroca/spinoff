@@ -17,12 +17,15 @@ describe Company do
   it 'allows only one company per user' do
     user = create(:user)
 
-    build(:company, user: user).should_not be_valid
+    company = Company.new(name: "something")
+    company.should be_valid
+    company.user = user
+    company.should_not be_valid
   end
 
   describe ".buy" do
     let(:program) { create :movie, available: true, popularity: 100 }
-    let(:company) { create :company, money: 300 }
+    let(:company) { create(:user).company }
 
     it "gives the program to the company" do
       expect{
@@ -64,6 +67,48 @@ describe Company do
 
       it "returns false" do
         company.buy(program).should be_false
+      end
+    end
+  end
+
+  describe ".sign" do
+    let(:ad_contract) { create :ad_contract }
+    let(:company) { create(:user).company }
+
+    it "gives the ad to the company" do
+      expect{
+        company.sign(ad_contract)
+      }.to change{company.reload.ad_contracts.include?(ad_contract)}.from(false).to(true)
+    end
+
+    it "marks the ad as not available" do
+      expect{
+        company.sign(ad_contract)
+      }.to change{ad_contract.reload.available?}.from(true).to(false)
+    end
+
+    it 'returns true' do
+      company.sign(ad_contract).should be_true
+    end
+
+    it 'notifies to Pusher' do
+      channel = double
+      Pusher.should_receive(:[]) { channel }
+      channel.should_receive(:trigger).with('ad-contract-signed', ad_contract.id)
+      company.sign(ad_contract)
+    end
+
+    context "with an unavailable ad" do
+      let(:ad_contract) { create :ad_contract, company: create(:user).company }
+
+      it "does not give the program to the company" do
+        expect{
+          company.sign(ad_contract)
+        }.to_not change{company.ad_contracts.include? ad_contract}
+      end
+
+      it "returns false" do
+        company.sign(ad_contract).should be_false
       end
     end
   end

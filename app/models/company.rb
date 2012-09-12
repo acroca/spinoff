@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
 
   belongs_to :user
   has_many :programs
+  has_many :ad_contracts
   has_many :slots
 
   validates_presence_of :name
@@ -18,6 +19,15 @@ class Company < ActiveRecord::Base
     self.save!
     self.programs << program
     Pusher["spinoff"].trigger 'program-bought', program.id
+    true
+  end
+
+  def sign(ad_contract)
+    return false unless ad_contract.available?
+    ad_contract.company = self
+    ad_contract.save!
+    self.ad_contracts << ad_contract
+    Pusher["spinoff"].trigger 'ad-contract-signed', ad_contract.id
     true
   end
 end
