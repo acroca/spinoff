@@ -12,10 +12,12 @@ class Company < ActiveRecord::Base
   def buy(program)
     return false unless program.available?
     program.available = false
-    program.save
+    program.company = self
+    program.save!
     self.money -= program.price
-    self.save
+    self.save!
     self.programs << program
+    Pusher["spinoff"].trigger 'program-bought', program.id
     true
   end
 end

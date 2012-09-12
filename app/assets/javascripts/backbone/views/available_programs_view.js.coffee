@@ -2,7 +2,7 @@ class Spinoff.Views.AvailableProgramsView extends Backbone.View
   template: JST["backbone/templates/available_programs"]
 
   initialize: (opts) ->
-    @collection.bind 'reset', @render, @
+    @collection.bind 'reset remove add', @render, @
 
   render: ->
     $(@el).html(@template())

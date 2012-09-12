@@ -41,3 +41,6 @@ $ ->
     window.configVariables.set
       day: data.day
       time: data.time
+
+  channel.bind 'program-bought', (programId) ->
+    programsCollection.programBought(programId)

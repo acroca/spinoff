@@ -46,6 +46,13 @@ describe Company do
       company.buy(program).should be_true
     end
 
+    it 'notifies to Pusher' do
+      channel = double
+      Pusher.should_receive(:[]) { channel }
+      channel.should_receive(:trigger).with('program-bought', program.id)
+      company.buy(program)
+    end
+
     context "with an unavailable program" do
       let(:program) { create :movie, available: false}
 

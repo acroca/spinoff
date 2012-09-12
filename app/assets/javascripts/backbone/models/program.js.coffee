@@ -22,4 +22,8 @@ class Spinoff.Collections.ProgramsCollection extends Backbone.Collection
   comparator: (program) ->
     program.get("price")
 
+  programBought: (programId) ->
+    program = @get(programId)
+    @remove(program) if program
+
 window.programsCollection = new Spinoff.Collections.ProgramsCollection()
