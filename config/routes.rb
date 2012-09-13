@@ -11,7 +11,7 @@ Spinoff::Application.routes.draw do
       end
     end
     resources :programs, only: [:index, :show, :update]
-    resources :slots, only: [:create, :index, :show]
+    resources :slots, only: [:create, :index, :show, :update]
     resources :ad_contracts, only: [:update, :index, :show]
   end
 end

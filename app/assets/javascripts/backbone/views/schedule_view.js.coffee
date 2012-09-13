@@ -14,13 +14,16 @@ class Spinoff.Views.ScheduleView extends Backbone.View
   events:
     "click .set-slot": "openSlotModal"
     "click .select-program": "createSlot"
+    "click .set-ad-contract": "openAdModal"
+    "click .select-ad-contract": "createAd"
 
   render: ->
     today = configVariables.get("day")
     rendered = @template
-      days: [today...(today+3)]
+      days: [today...(today + 3)]
       times: [0..11]
       programs: company.programs.models
+      adContracts: company.adContracts.models
     $(@el).html(rendered)
 
     @moveCurrentTime()
@@ -28,7 +31,7 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       $element = $(this)
       time = $element.data("time-tooltip")
       title = _.map configVariables.get("genresByTime")[time], (k, v) ->
-        percent = parseInt((k*100), 10)
+        percent = parseInt((k * 100), 10)
         "#{percent}% #{v}"
       $element.find("i").tooltip
         title: title.join('<br/>')
@@ -66,6 +69,14 @@ class Spinoff.Views.ScheduleView extends Backbone.View
 
     $("#programsModal").modal
       show: true
+  openAdModal: (e) ->
+    cell = $(e.target).parents('.slot')
+    @selectedCell =
+      day: cell.data("day")
+      time: cell.data("time")
+
+    $("#adContractsModal").modal
+      show: true
 
   createSlot: (e)->
     slotAttrs =
@@ -73,10 +84,15 @@ class Spinoff.Views.ScheduleView extends Backbone.View
       time: @selectedCell.time
       program_id: $(e.target).data("program-id")
     slot = slotsCollection.create slotAttrs,
-      error: (slot,response) ->
+      error: (slot, response) ->
         errors = JSON.parse(response.responseText)
         alert("Wrong slot") if errors.time
         slotsCollection.remove(slot)
+
+  createAd: (e) ->
+    slot = slotsCollection.where(day: @selectedCell.day, time: @selectedCell.time)[0]
+    slot.set(ad_contract_id: $(e.target).data("ad-contract-id"))
+    slot.save()
 
 class Spinoff.Views.SlotView extends Backbone.View
   template: JST["backbone/templates/slot"]

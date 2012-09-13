@@ -1,6 +1,12 @@
 <div>
   <%= JST["backbone/templates/stars"]({rating: slot.program.popularityPercent}) %>
   <%= slot.program.get("name") %>
+
+  <% if(slot.adContract){ %>
+    (Ad: <%= slot.adContract.get("advertiser") %> - $<%= slot.adContract.get("price") %>)
+  <% } else if(slot.isFuture()) { %>
+    <button class="set-ad-contract btn btn-small" type="button">Set ad</button>
+  <% } %>
   <% if(slot.get("audience")){ %>
     <p>You've got <%= slot.get("audience") %> views</p>
   <% } %>

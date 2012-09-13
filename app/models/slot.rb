@@ -7,6 +7,7 @@ class Slot < ActiveRecord::Base
   validate :creation_time_validation, on: :create
 
   belongs_to :company
+  belongs_to :ad_contract
   belongs_to :program
 
   private

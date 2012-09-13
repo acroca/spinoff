@@ -4,11 +4,19 @@ class Spinoff.Models.Slot extends Backbone.Model
 
   initialize: (options)->
     configVariables.bind 'change', @fetchIfAffected, @
-    @program = company.programs.get(options.program_id)
+    @setAssociations()
     super(options)
+
+  change: ->
+    @setAssociations()
+
+  setAssociations: ->
+    @program = company.programs.get(@get("program_id"))
+    @adContract = company.adContracts.get(@get("ad_contract_id"))
 
   defaults:
     program_id: null
+    ad_contract_id: null
     audience: null
     day: null
     time: null
@@ -16,6 +24,12 @@ class Spinoff.Models.Slot extends Backbone.Model
   fetchIfAffected: (config) ->
     if config.previous("day") == @get("day") && config.previous("time") == @get("time")
       @fetch()
+
+  isFuture: () ->
+    today = configVariables.get("day")
+    return true if @get("day") > today
+    return false if @get("day") < today
+    configVariables.get("time") < @get("time")
 
 
 class Spinoff.Collections.SlotsCollection extends Backbone.Collection

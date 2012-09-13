@@ -28,13 +28,30 @@
 <div class="modal hide" id="programsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
+    <h3 id="myModalLabel">Select a program</h3>
   </div>
   <div class="modal-body">
     <% for(program in programs){ %>
       <p>
         <%= JST["backbone/templates/stars"]({rating: programs[program].popularityPercent}) %>
         <a class="select-program" data-program-id="<%= programs[program].get("id") %>" href="#" data-dismiss="modal" aria-hidden="true"><%= programs[program].get("name") %></a>
+      </p>
+    <% } %>
+  </div>
+</div>
+
+
+<div class="modal hide" id="adContractsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Select an Ad contract</h3>
+  </div>
+  <div class="modal-body">
+    <% for(adContract in adContracts){ %>
+      <p>
+        <a class="select-ad-contract" data-ad-contract-id="<%= adContracts[adContract].get("id") %>" href="#" data-dismiss="modal" aria-hidden="true">
+          <%= adContracts[adContract].get("advertiser") %> - $<%= adContracts[adContract].get("price") %>
+        </a>
       </p>
     <% } %>
   </div>

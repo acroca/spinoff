@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912150115) do
+ActiveRecord::Schema.define(:version => 20120913114347) do
 
   create_table "ad_contracts", :force => true do |t|
     t.string   "advertiser"
@@ -52,9 +52,10 @@ ActiveRecord::Schema.define(:version => 20120912150115) do
     t.integer  "program_id"
     t.integer  "day"
     t.integer  "time"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "audience"
+    t.integer  "ad_contract_id"
   end
 
   create_table "users", :force => true do |t|

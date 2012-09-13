@@ -60,7 +60,7 @@ describe Api::SlotsController do
     before { sign_in user }
 
     def do_request(slot_params)
-      get :create, slot: slot_params, format: 'json'
+      post :create, slot: slot_params, format: 'json'
     end
 
     it 'creates the slot' do
@@ -68,5 +68,43 @@ describe Api::SlotsController do
         do_request day: 1, time: 1
       }.to change { Slot.count }.by(1)
     end
+  end
+
+  describe "PUT '/api/v1/slots/1'" do
+    let(:user) { create(:user) }
+    let(:program) { create(:movie, company: user.company) }
+    let(:slot) { create(:slot, company: user.company, program: program) }
+    let(:ad_contract) { create(:ad_contract, company: user.company) }
+
+    before { sign_in user }
+
+    def do_request(slot_params)
+      put :update, id: slot.id, slot: slot_params, format: 'json'
+    end
+
+    it 'sets the ad_contract to the slot' do
+      expect {
+        do_request ad_contract_id: ad_contract.id
+      }.to change { slot.reload.ad_contract }.from(nil).to(ad_contract)
+    end
+
+    context "with another user's slot" do
+      let(:slot) { create(:slot) }
+      it "doesn't set the ad" do
+        expect {
+          do_request ad_contract_id: ad_contract.id
+        }.to_not change { slot.reload.ad_contract }
+      end
+    end
+
+    context "with another user's ad" do
+      let(:ad_contract) { create(:ad_contract) }
+      it "doesn't set the ad" do
+        expect {
+          do_request ad_contract_id: ad_contract.id
+        }.to_not change { slot.reload.ad_contract }
+      end
+    end
+
   end
 end
