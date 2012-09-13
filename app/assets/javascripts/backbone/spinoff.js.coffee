@@ -21,6 +21,8 @@ $.ajaxSetup
 $ ->
   $ = jQuery
   $game = $("#game")
+  window.configVariables = new Spinoff.Models.ConfigVariables $game.data('current-configuration')
+
   window.company = new Spinoff.Models.Company(
     $game.data('user-company-json'),
     $game.data('user-company-programs-json'),
@@ -31,7 +33,6 @@ $ ->
   router = new Spinoff.Routers.SpinoffRouter(gameView: gameView)
   Backbone.history.start({root: '/game'})
 
-  window.configVariables = new Spinoff.Models.ConfigVariables $game.data('current-configuration')
 
   pusher = new Pusher($game.data('pusher-key'))
   channel = pusher.subscribe('spinoff')

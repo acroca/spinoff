@@ -9,6 +9,7 @@ class Spinoff.Models.Slot extends Backbone.Model
 
   change: ->
     @setAssociations()
+    super()
 
   setAssociations: ->
     @program = company.programs.get(@get("program_id"))
