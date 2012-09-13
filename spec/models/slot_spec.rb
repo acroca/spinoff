@@ -22,6 +22,11 @@ describe Slot do
       build(:slot, time: 4, day: 5).should_not be_valid
       build(:slot, time: 6, day: 4).should_not be_valid
     end
+
+    it 'allows up to 2 days in the future' do
+      build(:slot, time: 11, day: 7).should be_valid
+      build(:slot, time: 0, day: 8).should_not be_valid
+    end
   end
 
   it 'is unique by company, day and time' do

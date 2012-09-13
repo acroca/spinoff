@@ -21,7 +21,7 @@ class Slot < ActiveRecord::Base
   def creation_time_validation
     return unless day && time # This is just to prevent nil errors, another
                               # validation will take care of the value.
-    return if day > ConfigVariables[:day].to_i
+    return if day > ConfigVariables[:day].to_i && day <= (ConfigVariables[:day].to_i + 2)
     return if day == ConfigVariables[:day].to_i && time > ConfigVariables[:time].to_i
     errors.add(:time, "Should be a future time")
   end
