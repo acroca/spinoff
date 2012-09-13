@@ -31,4 +31,16 @@ describe Slot do
           day: slot.day,
           time: slot.day).should_not be_valid
   end
+
+  describe "#pay" do
+    it 'adds money to the company based on the ad and audience' do
+      ad_contract = create(:ad_contract, price: 20)
+      slot = create(:slot, audience: 1000, ad_contract: ad_contract)
+      company = slot.company
+
+      expect{
+        slot.pay!
+      }.to change{company.reload.money}.by(20)
+    end
+  end
 end

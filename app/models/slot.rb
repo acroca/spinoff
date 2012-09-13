@@ -10,6 +10,12 @@ class Slot < ActiveRecord::Base
   belongs_to :ad_contract
   belongs_to :program
 
+  def pay!
+    return unless audience && ad_contract
+    company.money += ((ad_contract.price / 1000.0) * audience).round
+    company.save!
+  end
+
   private
 
   def creation_time_validation

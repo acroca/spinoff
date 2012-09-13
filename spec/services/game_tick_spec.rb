@@ -26,6 +26,14 @@ describe GameTick do
       GameTick.perform
     end
 
+    it "pays everyone" do
+      create(:slot, time: 1, day: 2)
+      ConfigVariables[:time] = 1
+      ConfigVariables[:day] = 2
+      Slot.any_instance.should_receive(:pay!)
+      GameTick.perform
+    end
+
     it "publishes on Pusher" do
       ConfigVariables[:time] = 1
       ConfigVariables[:day] = 2

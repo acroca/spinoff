@@ -6,6 +6,7 @@ class GameTick
 
     slots = Slot.where(day: day, time: time)
     Audience.distribute(time: time, slots: slots, population: population)
+    slots.each(&:pay!)
 
     time += 1
     if time > 11
