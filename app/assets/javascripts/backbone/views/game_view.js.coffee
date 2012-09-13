@@ -30,10 +30,25 @@ class Spinoff.Views.GameView extends Backbone.View
         @setSubview(view.render().el)
 
 
+  availableAdContracts: ->
+    @resetSubview()
+    adContractsCollection.fetch
+      success: =>
+        view = new Spinoff.Views.AvailableAdContractsView
+          collection: adContractsCollection
+        @setSubview(view.render().el)
+
+
   myPrograms: ->
     @resetSubview()
     view = new Spinoff.Views.MyProgramsView
       collection: company.programs
+    @setSubview(view.render().el)
+
+  myAdContracts: ->
+    @resetSubview()
+    view = new Spinoff.Views.MyAdContractsView
+      collection: company.adContracts
     @setSubview(view.render().el)
 
   schedule: ->

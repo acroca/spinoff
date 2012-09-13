@@ -8,6 +8,8 @@ class AdContract < ActiveRecord::Base
   attr_accessible :company_id
   belongs_to :company
 
+  scope :available, where(:company_id => nil)
+
   def available?
     company_id.nil?
   end

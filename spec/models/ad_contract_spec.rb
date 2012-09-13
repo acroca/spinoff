@@ -18,4 +18,15 @@ describe AdContract do
       subject.should be_available
     end
   end
+
+  describe ".available scope" do
+    let!(:available) { create(:ad_contract) }
+    let!(:not_available) { create(:ad_contract, company: create(:user).company) }
+
+    subject { AdContract.available }
+
+    it { should include available }
+    it { should_not include not_available }
+  end
+
 end

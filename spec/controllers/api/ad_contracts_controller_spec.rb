@@ -3,10 +3,8 @@ require 'spec_helper'
 describe Api::AdContractsController do
   describe "GET '/api/v1/ad_contracts'" do
     let(:user) { create(:user) }
-    let!(:company_ad_contract) { create(:ad_contract, company_id: user.company.id) }
-    let!(:other_ad_contract) { create(:ad_contract) }
-
-    before { sign_in user }
+    let!(:available_ad_contract) { create(:ad_contract) }
+    let!(:signed_ad_contract) { create(:ad_contract, company_id: user.company.id) }
 
     def do_request
       get :index, format: 'json'
@@ -22,8 +20,8 @@ describe Api::AdContractsController do
     it "returns the company ad_contracts" do
       do_request
       ad_contracts = assigns(:ad_contracts)
-      ad_contracts.should include(company_ad_contract)
-      ad_contracts.should_not include(other_ad_contract)
+      ad_contracts.should include(available_ad_contract)
+      ad_contracts.should_not include(signed_ad_contract)
     end
   end
 

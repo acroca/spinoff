@@ -1,7 +1,6 @@
 class Api::AdContractsController < ApiController
   def index
-    @company = current_user.company
-    @ad_contracts = @company.ad_contracts
+    @ad_contracts = AdContract.available
     render :index
   end
 
@@ -17,7 +16,7 @@ class Api::AdContractsController < ApiController
 
   def update
     ad_contract = AdContract.find(params[:id])
-    if params[:program][:company_id]
+    if params[:ad_contract][:company_id]
       current_user.company.sign ad_contract
     end
     render json: ad_contract, status: 200
